@@ -10,6 +10,7 @@ from .approve_table import create_approve_table, create_case_status_table, creat
 from .drc_ro_tables import create_drc_table, create_ro_table
 from .payments_table import create_payments_table
 from .ro_tables import create_ro_negotiations_table, create_ro_requests_table
+from .commissions_table import create_commissions_table
 
 logger = logging.getLogger('excel_data_writer')
 
@@ -28,6 +29,7 @@ def create_all_tables(workBook, case_data, db, styles):
     
     Outputs:
         - Logs success or failure messages while creating the sheet.
+    Create the Case Details sheet with all tables.
     """
     try:
         logger.info("Creating Case Details sheet...")
@@ -102,6 +104,10 @@ def create_all_tables(workBook, case_data, db, styles):
         
         # Create the Recovery Officer Requests table
         next_row = create_ro_requests_table(worksheet, case_data, gap_row, y_pointer, styles)
+        gap_row = next_row + 1  # Add a gap after the RO Requests table
+        
+        # Create the Commissions table
+        next_row = create_commissions_table(worksheet, db, case_id, gap_row, y_pointer, styles)
         
         logger.info("Case Details sheet created successfully.")
         return worksheet
