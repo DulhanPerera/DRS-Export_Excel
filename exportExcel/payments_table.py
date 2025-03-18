@@ -13,7 +13,7 @@ def create_payments_table(worksheet, db, case_id, x_pointer, y_pointer, styles):
         headers = [
             "Payment ID", "Settlement ID", "Installment Sequence", "Bill Payment Sequence", "Bill Paid Amount", "Bill Paid Date",
             "Bill Payment Status", "Bill Payment Type", "Settled Balance", "Cumulative Settled Balance", "Created Date and Time",
-            "Account No", "Money Transaction Reference Type", "Money Transaction Type"
+            "Account No", "Money Transaction Reference Type", "Money Transaction ID"
         ]
         
         # Fetch payments data from the Case_payments collection
@@ -36,7 +36,7 @@ def create_payments_table(worksheet, db, case_id, x_pointer, y_pointer, styles):
                 payment.get("created_dtm"),
                 payment.get("account_no"),
                 payment.get("money_transaction_Reference_type"),
-                payment.get("money_transaction_Type")
+                payment.get("money_transaction_id")
             ]
             for payment in payments_data
         ]
